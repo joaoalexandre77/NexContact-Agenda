@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+        <header>
+            <h1>NexContact</h1>
+        </header>
+        <main>
+            <div class="block-login">
+                <div class="header-login">
+                    <h1 class="title-header-login">NexContact</h1>
+                    <h2 class="subtitle-header-login">Crie a sua conta</h2>
+                </div>
+                <form action="cadastro/cadastrar" method="POST">
+                    <label>Nome Completo</label>
+                    <input type="text" name="txtNome" placeholder="Digite o nome completo" required>
+
+                    <label>Email</label>
+                    <input type="text" name="txtEmail" placeholder="Digite o e-mail" required>
+
+                    <label>Senha</label>
+                    <input type="password" name="txtSenha" placeholder="Digite a senha" required>
+                    <button type="submit">Criar</button>
+                </form>
+                <div class="footer-login">
+                    <p class="p-footer-login">Já possui conta?</p>
+                    <a href="/" class="a-footer-login">Entre agora</a>
+                </div>
+            </div>
+        </main>
+        <script src="js/main.js"></script>
+</body>
+</html>
