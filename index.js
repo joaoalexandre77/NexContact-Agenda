@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { authConnectionDataBase } from './src/config/database.js';
 import { sessionMiddleware } from './src/middlewares/sessionMiddleware.js';
+import { securityHelmet } from './src/middlewares/helmetMiddleware.js';
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use(urlencoded({extended: false}));
 app.use(sessionMiddleware);
 
 authConnectionDataBase();
+
+app.use(securityHelmet);
 
 app.use('/', router);
 
