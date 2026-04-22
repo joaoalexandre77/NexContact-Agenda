@@ -1,5 +1,6 @@
 import { where } from 'sequelize';
 import userModel from '../model/userModel.js';
+import { comparePassword } from '../services/bcrypt.js';
 
 export const renderLogin = (req, res ) => {
     res.render('index');
@@ -7,18 +8,27 @@ export const renderLogin = (req, res ) => {
 
 export const authLogin = (req, res) => {
     async function auth() {
+        const {txtEmail, txtSenha} = req.body;
         const user = await userModel.findOne({
             where: {
-                email: req.body.txtEmail,
-                senha: req.body.txtSenha
+                email: txtEmail
             }
         })
-        if(user) {
-            req.session.userId = user.id;
-            return res.redirect('/home');
-        } else {
-            res.send('Usuario nao encontrado');
+        if(!user) {
+            return res.send('Usuario nao encontrado');
         }
+
+        const isValidPassword = await comparePassword(txtSenha, user.senha);
+
+
+
+        if(!isValidPassword) {
+            return res.send('Senha incorreta');
+        }
+
+        req.session.userId = user.id;
+
+        res.redirect('/home')
     }
     auth();
 }

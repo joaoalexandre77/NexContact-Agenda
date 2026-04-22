@@ -1,15 +1,16 @@
 import userModel from '../model/userModel.js';
+import { hashPassword } from '../services/bcrypt.js';
 
 const getCadastro = (req, res) => {
     res.render('cadastro');
 }
 
-const postCadastro = (req, res) => {
+const postCadastro = async (req, res) => {
     console.log('Postado');
 
     const userName = req.body.txtNome;
     const email = req.body.txtEmail;
-    const password = req.body.txtSenha;
+    const password = await hashPassword(req.body.txtSenha);
 
     async function insertData() {
         try {
